@@ -1,10 +1,14 @@
-# Inato Take-Home Test Specification
+# Credits
 
-You are a new developer in the Inato team, and your first job is to add a feature to an old existing piece of code.
+This test is forked from [Inato's take home test](https://github.com/inato/take-home-test). Many thanks to them !
+
+# Take-Home Test Specification
+
+You are a new developer in the Cajoo team, and your first job is to add a feature to an old existing piece of code.
 
 ## System specifications
 
-Hi and welcome to the team. We are in the future, and Inato has extended its activities by opening a pharmacy. Your task is to add a new feature to our system so that we can begin distributing a new drug. First an introduction to our system:
+Hi and welcome to the team. We are in the future, and Cajoo has extended its activities by opening a pharmacy. Your task is to add a new feature to our system so that we can begin distributing a new drug. First an introduction to our system:
 
 - All drugs have an `expiresIn` value which denotes the number of days we have until the item expires.
 - All drugs have a `benefit` value which denotes how powerful the drug is.
