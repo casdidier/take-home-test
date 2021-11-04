@@ -47,8 +47,10 @@ describe("Pharmacy", () => {
       });
       it("should never go more than 50 for a benefit value", () => {
         expect(
-          new Pharmacy([new SuperDrug("Fervex49", 0, 49)]).updateBenefitValue()
-        ).toEqual([new SuperDrug("Fervex49", -1, 50)]);
+          new Pharmacy([
+            new SuperDrug("Herbal Tea", 0, 49),
+          ]).updateBenefitValue()
+        ).toEqual([new SuperDrug("Herbal Tea", -1, 50)]);
       });
     });
 
@@ -65,16 +67,32 @@ describe("Pharmacy", () => {
     describe("Drugs with higher efficiency as expiration date approaches (eg: Fervex", () => {
       it("should increase in benefit as expiration dates approaches ", () => {
         expect(
-          new Pharmacy([new SuperDrug("Fervex", 21, 10)]).updateBenefitValue()
-        ).toEqual([new SuperDrug("Fervex", 20, 11)]);
+          new Pharmacy([
+            new SuperLimitedDrug("Fervex", 21, 10),
+          ]).updateBenefitValue()
+        ).toEqual([new SuperLimitedDrug("Fervex", 20, 11)]);
       });
-      it.todo(
-        "should increase in benefit by 2 as expiration dates approaches within 10 days or less"
-      );
-      it.todo(
-        "should increase in benefit by 3as expiration dates approaches within 5 days or less"
-      );
-      it.todo("should nullify in benefit as expiration dates reached");
+      it("should increase in benefit by 2 as expiration dates approaches within 10 days or less", () => {
+        expect(
+          new Pharmacy([
+            new SuperLimitedDrug("Fervex", 10, 10),
+          ]).updateBenefitValue()
+        ).toEqual([new SuperLimitedDrug("Fervex", 9, 12)]);
+      });
+      it("should increase in benefit by 3 as expiration dates approaches within 5 days or less", () => {
+        expect(
+          new Pharmacy([
+            new SuperLimitedDrug("Fervex", 5, 13),
+          ]).updateBenefitValue()
+        ).toEqual([new SuperLimitedDrug("Fervex", 4, 16)]);
+      });
+      it("should nullify in benefit as expiration dates reached", () => {
+        expect(
+          new Pharmacy([
+            new SuperLimitedDrug("Fervex", 1, 15),
+          ]).updateBenefitValue()
+        ).toEqual([new SuperLimitedDrug("Fervex", 0, 0)]);
+      });
     });
 
     describe("Drugs with higher efficiency downgrades", () => {
