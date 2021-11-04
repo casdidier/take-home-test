@@ -27,7 +27,13 @@ describe("Pharmacy", () => {
         new Pharmacy([new NormalDrug("test", 0, 10)]).updateBenefitValue()
       ).toEqual([new NormalDrug("test", -1, 8)]);
     });
-    it.todo("should never have a negative benefit value");
+    it("should never have a negative benefit value", () => {
+      expect(
+        new Pharmacy([
+          new NormalDrug("NotNegativeDrug", 0, 0),
+        ]).updateBenefitValue()
+      ).toEqual([new NormalDrug("NotNegativeDrug", -1, 0)]);
+    });
   });
 
   describe("Special drugs", () => {

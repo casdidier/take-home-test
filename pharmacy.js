@@ -16,11 +16,18 @@ export class NormalDrug extends Drug {
   }
 
   update() {
+    let newBenefit = this.benefit;
+
     if (!super.isExpired()) {
-      this.benefit--;
+      newBenefit--;
     } else {
-      this.benefit = this.benefit - 2;
+      newBenefit = newBenefit - 2;
     }
+    // cannot be negative
+    if (newBenefit < 0) {
+      newBenefit = 0;
+    }
+    this.benefit = newBenefit;
     this.expiresIn--;
   }
 }
@@ -36,40 +43,7 @@ export class Pharmacy {
       if (drug instanceof NormalDrug) {
         console.log("updating");
         drug.update();
-      } else {
-        if (drug.benefit < 50) {
-          drug.benefit = drug.benefit + 1;
-          if (drug.name == "Fervex") {
-            if (drug.expiresIn < 11) {
-              if (drug.benefit < 50) {
-                drug.benefit = drug.benefit + 1;
-              }
-            }
-            if (drug.expiresIn < 6) {
-              if (drug.benefit < 50) {
-                drug.benefit = drug.benefit + 1;
-              }
-            }
-          }
-        }
       }
-      // if (drug.expiresIn < 0) {
-      //   if (drug.name != "Herbal Tea") {
-      //     if (drug.name != "Fervex") {
-      //       if (drug.benefit > 0) {
-      //         if (drug.name != "Magic Pill") {
-      //           drug.benefit = drug.benefit - 1;
-      //         }
-      //       }
-      //     } else {
-      //       drug.benefit = drug.benefit - drug.benefit;
-      //     }
-      //   } else {
-      //     if (drug.benefit < 50) {
-      //       drug.benefit = drug.benefit + 1;
-      //     }
-      //   }
-      // }
     });
 
     return this.drugs;
