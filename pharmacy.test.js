@@ -3,6 +3,7 @@ import {
   MetaDrug,
   NormalDrug,
   SuperDrug,
+  SuperLimitedDrug,
   Pharmacy,
   drugs,
 } from "./pharmacy";
@@ -62,7 +63,11 @@ describe("Pharmacy", () => {
     });
 
     describe("Drugs with higher efficiency as expiration date approaches (eg: Fervex", () => {
-      it.todo("should increase in benefit as expiration dates approaches ");
+      it("should increase in benefit as expiration dates approaches ", () => {
+        expect(
+          new Pharmacy([new SuperDrug("Fervex", 21, 10)]).updateBenefitValue()
+        ).toEqual([new SuperDrug("Fervex", 20, 11)]);
+      });
       it.todo(
         "should increase in benefit by 2 as expiration dates approaches within 10 days or less"
       );
