@@ -1,12 +1,6 @@
 import { Drug, NormalDrug, SuperDrug, Pharmacy, drugs } from "./pharmacy";
 
 describe("Pharmacy", () => {
-  let pharmacy;
-
-  beforeEach(() => {
-    pharmacy = new Pharmacy(drugs);
-  });
-
   describe("Normal drugs", () => {
     it("should decrease the benefit and expiresIn", () => {
       expect(
@@ -43,7 +37,11 @@ describe("Pharmacy", () => {
           new Pharmacy([new SuperDrug("Fervex", 0, 10)]).updateBenefitValue()
         ).toEqual([new SuperDrug("Fervex", -1, 12)]);
       });
-      it.todo("should never go more than 50 for a benefit value");
+      it("should never go more than 50 for a benefit value", () => {
+        expect(
+          new Pharmacy([new SuperDrug("Fervex49", 0, 49)]).updateBenefitValue()
+        ).toEqual([new SuperDrug("Fervex49", -1, 50)]);
+      });
     });
 
     describe("Drugs stay same as new over time", () => {
