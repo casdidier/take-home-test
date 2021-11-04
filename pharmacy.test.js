@@ -97,7 +97,14 @@ describe("Pharmacy", () => {
 
     describe("Drugs with higher efficiency downgrades", () => {
       it.todo(
-        "should degrades in benefit twice as fast as normal drugs for Dafalgan"
+        "should degrades in benefit twice as fast as normal drugs for Dafalgan",
+        () => {
+          expect(
+            new Pharmacy([
+              new SuperLimitedDrug("Dafalgan", 10, 10),
+            ]).updateBenefitValue()
+          ).toEqual([new SuperLimitedDrug("Dafalgan", 9, 8)]);
+        }
       );
     });
   });
