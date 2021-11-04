@@ -1,4 +1,7 @@
 export class Drug {
+  static HIGHEST_BENEFIT_LIMIT = 50;
+  static LOWEST_BENEFIT_LIMIT = 0;
+
   constructor(name, expiresIn, benefit) {
     this.name = name;
     this.expiresIn = expiresIn;
@@ -42,7 +45,7 @@ export class NormalDrug extends Drug {
       newBenefit = super.updateBenefit(newBenefit, -2);
     }
     // cannot be negative
-    newBenefit = super.setLowerLimit(newBenefit, 0);
+    newBenefit = super.setLowerLimit(newBenefit, Drug.LOWEST_BENEFIT_LIMIT);
 
     this.benefit = newBenefit;
     this.expiresIn--;
@@ -63,7 +66,7 @@ export class SuperDrug extends Drug {
       newBenefit = super.updateBenefit(newBenefit, 2);
     }
 
-    newBenefit = super.setHigherLimit(newBenefit, 50);
+    newBenefit = super.setHigherLimit(newBenefit, Drug.HIGHEST_BENEFIT_LIMIT);
     // // cannot be negative
     this.benefit = newBenefit;
     this.expiresIn--;
@@ -87,15 +90,15 @@ export class LesserNormalDrug extends NormalDrug {
 
   update() {
     let newBenefit = this.benefit;
-    let decayRate = 2;
+    const DECAY_RATE = 2;
 
     if (!super.isExpired()) {
-      newBenefit = super.updateBenefit(newBenefit, -1 * decayRate);
+      newBenefit = super.updateBenefit(newBenefit, -1 * DECAY_RATE);
     } else {
-      newBenefit = super.updateBenefit(newBenefit, -2 * decayRate);
+      newBenefit = super.updateBenefit(newBenefit, -2 * DECAY_RATE);
     }
     // cannot be negative
-    newBenefit = super.setLowerLimit(newBenefit, 0);
+    newBenefit = super.setLowerLimit(newBenefit, Drug.LOWEST_BENEFIT_LIMIT);
 
     this.benefit = newBenefit;
     this.expiresIn--;
@@ -115,10 +118,10 @@ export class SuperLimitedDrug extends SuperDrug {
         newBenefit = super.updateBenefit(newBenefit, 1);
       }
     } else {
-      newBenefit = 0;
+      newBenefit = Drug.LOWEST_BENEFIT_LIMIT;
     }
 
-    newBenefit = super.setLowerLimit(newBenefit, 0);
+    newBenefit = super.setLowerLimit(newBenefit, Drug.LOWEST_BENEFIT_LIMIT);
     // // cannot be negative
     this.benefit = newBenefit;
     this.expiresIn--;
