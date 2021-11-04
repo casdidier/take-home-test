@@ -37,9 +37,14 @@ describe("Pharmacy", () => {
   });
 
   describe("Special drugs", () => {
-    describe("Drug can only get better after expiration date", () => {
+    describe("Drug which can only get better after expiration date", () => {
       it.todo(
-        "should increases benefit twice as fast it gets older after expiration date"
+        "should increase benefit twice as fast it gets older after expiration date",
+        () => {
+          expect(
+            new Pharmacy([new NormalDrug("Fervex", 0, 10)]).updateBenefitValue()
+          ).toEqual([new NormalDrug("Fervex", -1, 12)]);
+        }
       );
       it.todo("should never go more than 50 for a benefit value");
     });
