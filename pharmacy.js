@@ -85,12 +85,18 @@ export class SuperLimitedDrug extends SuperDrug {
     let newBenefit = this.benefit;
 
     if (!super.isExpired()) {
-      newBenefit = super.updateBenefit(newBenefit, 1);
+      if (this.expiresIn < 6) {
+        newBenefit = super.updateBenefit(newBenefit, 3);
+      } else if (this.expiresIn < 11) {
+        newBenefit = super.updateBenefit(newBenefit, 2);
+      } else {
+        newBenefit = super.updateBenefit(newBenefit, 1);
+      }
     } else {
-      newBenefit = super.updateBenefit(newBenefit, 2);
+      newBenefit = 0;
     }
 
-    newBenefit = super.setHigherLimit(newBenefit, 50);
+    newBenefit = super.setLowerLimit(newBenefit, 0);
     // // cannot be negative
     this.benefit = newBenefit;
     this.expiresIn--;

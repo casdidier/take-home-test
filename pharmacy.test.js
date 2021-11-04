@@ -89,9 +89,9 @@ describe("Pharmacy", () => {
       it("should nullify in benefit as expiration dates reached", () => {
         expect(
           new Pharmacy([
-            new SuperLimitedDrug("Fervex", 1, 15),
+            new SuperLimitedDrug("Fervex", 0, 15),
           ]).updateBenefitValue()
-        ).toEqual([new SuperLimitedDrug("Fervex", 0, 0)]);
+        ).toEqual([new SuperLimitedDrug("Fervex", -1, 0)]);
       });
     });
 
