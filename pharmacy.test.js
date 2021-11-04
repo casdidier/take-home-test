@@ -1,4 +1,4 @@
-import { Drug, NormalDrug, Pharmacy, drugs } from "./pharmacy";
+import { Drug, NormalDrug, SuperDrug, Pharmacy, drugs } from "./pharmacy";
 
 describe("Pharmacy", () => {
   let pharmacy;
@@ -38,14 +38,11 @@ describe("Pharmacy", () => {
 
   describe("Special drugs", () => {
     describe("Drug which can only get better after expiration date", () => {
-      it.todo(
-        "should increase benefit twice as fast it gets older after expiration date",
-        () => {
-          expect(
-            new Pharmacy([new NormalDrug("Fervex", 0, 10)]).updateBenefitValue()
-          ).toEqual([new NormalDrug("Fervex", -1, 12)]);
-        }
-      );
+      it("should increase benefit twice as fast it gets older after expiration date", () => {
+        expect(
+          new Pharmacy([new SuperDrug("Fervex", 0, 10)]).updateBenefitValue()
+        ).toEqual([new SuperDrug("Fervex", -1, 12)]);
+      });
       it.todo("should never go more than 50 for a benefit value");
     });
 
