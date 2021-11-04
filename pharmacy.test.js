@@ -45,9 +45,13 @@ describe("Pharmacy", () => {
     });
 
     describe("Drugs stay same as new over time", () => {
-      it.todo(
-        "should never expires nor decreases in Benefit (e.g:  Magic Pill)"
-      );
+      it("should never expires nor decreases in Benefit (e.g:  Magic Pill)", () => {
+        expect(
+          new Pharmacy([
+            new SuperDrug("Magic Pill", 20, 20),
+          ]).updateBenefitValue()
+        ).toEqual([new SuperDrug("Magic Pill", 20, 20)]);
+      });
     });
 
     describe("Drugs with higher efficiency as expiration date approaches (eg: Fervex", () => {
