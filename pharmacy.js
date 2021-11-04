@@ -80,20 +80,42 @@ export class MetaDrug extends Drug {
   }
 }
 
+export class SuperLimitedDrug extends SuperDrug {
+  update() {
+    let newBenefit = this.benefit;
+
+    if (!super.isExpired()) {
+      newBenefit = super.updateBenefit(newBenefit, 1);
+    } else {
+      newBenefit = super.updateBenefit(newBenefit, 2);
+    }
+
+    newBenefit = super.setHigherLimit(newBenefit, 50);
+    // // cannot be negative
+    this.benefit = newBenefit;
+    this.expiresIn--;
+  }
+}
+
 export class Pharmacy {
   constructor(drugs = []) {
     this.drugs = drugs;
   }
   updateBenefitValue() {
     this.drugs.forEach((drug) => {
-      if (drug instanceof NormalDrug) {
-        drug.update();
-      }
-      if (drug instanceof SuperDrug) {
-        drug.update();
-      }
-      if (drug instanceof MetaDrug) {
-        drug.update();
+      switch (true) {
+        case drug instanceof NormalDrug:
+          drug.update();
+          break;
+        case drug instanceof SuperDrug:
+          drug.update();
+          break;
+        case drug instanceof SuperLimitedDrug:
+          drug.update();
+          break;
+        case drug instanceof MetaDrug:
+          drug.update();
+          break;
       }
     });
 
