@@ -12,6 +12,20 @@ export class Drug {
   updateBenefit(benefit, amount) {
     return benefit + amount;
   }
+
+  setHigherLimit(value, limit) {
+    if (value > limit) {
+      return limit;
+    }
+    return value;
+  }
+
+  setLowerLimit(value, limit) {
+    if (value < limit) {
+      return limit;
+    }
+    return value;
+  }
 }
 
 export class NormalDrug extends Drug {
@@ -28,9 +42,8 @@ export class NormalDrug extends Drug {
       newBenefit = super.updateBenefit(newBenefit, -2);
     }
     // cannot be negative
-    if (newBenefit < 0) {
-      newBenefit = 0;
-    }
+    newBenefit = super.setLowerLimit(newBenefit, 0);
+
     this.benefit = newBenefit;
     this.expiresIn--;
   }
@@ -50,9 +63,7 @@ export class SuperDrug extends Drug {
       newBenefit = super.updateBenefit(newBenefit, 2);
     }
 
-    if (newBenefit > 50) {
-      newBenefit = 50;
-    }
+    newBenefit = super.setHigherLimit(newBenefit, 50);
     // // cannot be negative
     this.benefit = newBenefit;
     this.expiresIn--;
