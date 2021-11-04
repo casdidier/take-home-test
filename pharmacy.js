@@ -80,6 +80,28 @@ export class MetaDrug extends Drug {
   }
 }
 
+export class LesserNormalDrug extends NormalDrug {
+  constructor(name, expiresIn, benefit) {
+    super(name, expiresIn, benefit);
+  }
+
+  update() {
+    let newBenefit = this.benefit;
+    let decayRate = 2;
+
+    if (!super.isExpired()) {
+      newBenefit = super.updateBenefit(newBenefit, -1 * decayRate);
+    } else {
+      newBenefit = super.updateBenefit(newBenefit, -2 * decayRate);
+    }
+    // cannot be negative
+    newBenefit = super.setLowerLimit(newBenefit, 0);
+
+    this.benefit = newBenefit;
+    this.expiresIn--;
+  }
+}
+
 export class SuperLimitedDrug extends SuperDrug {
   update() {
     let newBenefit = this.benefit;
@@ -120,6 +142,9 @@ export class Pharmacy {
           drug.update();
           break;
         case drug instanceof MetaDrug:
+          drug.update();
+          break;
+        case drug instanceof LesserNormalDrug:
           drug.update();
           break;
       }

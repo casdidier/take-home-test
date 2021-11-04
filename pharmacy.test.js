@@ -1,11 +1,10 @@
 import {
-  Drug,
   MetaDrug,
   NormalDrug,
   SuperDrug,
   SuperLimitedDrug,
   Pharmacy,
-  drugs,
+  LesserNormalDrug,
 } from "./pharmacy";
 
 describe("Pharmacy", () => {
@@ -96,16 +95,13 @@ describe("Pharmacy", () => {
     });
 
     describe("Drugs with higher efficiency downgrades", () => {
-      it.todo(
-        "should degrades in benefit twice as fast as normal drugs for Dafalgan",
-        () => {
-          expect(
-            new Pharmacy([
-              new SuperLimitedDrug("Dafalgan", 10, 10),
-            ]).updateBenefitValue()
-          ).toEqual([new SuperLimitedDrug("Dafalgan", 9, 8)]);
-        }
-      );
+      it("should degrades in benefit twice as fast as normal drugs for Dafalgan", () => {
+        expect(
+          new Pharmacy([
+            new LesserNormalDrug("Dafalgan", 10, 10),
+          ]).updateBenefitValue()
+        ).toEqual([new LesserNormalDrug("Dafalgan", 9, 8)]);
+      });
     });
   });
 });
