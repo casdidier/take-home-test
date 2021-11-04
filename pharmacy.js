@@ -8,6 +8,10 @@ export class Drug {
   isExpired() {
     return this.expiresIn <= 0;
   }
+
+  updateBenefit(benefit, amount) {
+    return benefit + amount;
+  }
 }
 
 export class NormalDrug extends Drug {
@@ -19,9 +23,9 @@ export class NormalDrug extends Drug {
     let newBenefit = this.benefit;
 
     if (!super.isExpired()) {
-      newBenefit--;
+      newBenefit = super.updateBenefit(newBenefit, -1);
     } else {
-      newBenefit = newBenefit - 2;
+      newBenefit = super.updateBenefit(newBenefit, -2);
     }
     // cannot be negative
     if (newBenefit < 0) {
@@ -41,15 +45,11 @@ export class SuperDrug extends Drug {
     let newBenefit = this.benefit;
 
     if (!super.isExpired()) {
-      newBenefit--;
+      newBenefit = super.updateBenefit(newBenefit, -1);
     } else {
-      newBenefit = newBenefit + 2;
-      console.log(newBenefit);
+      newBenefit = super.updateBenefit(newBenefit, 2);
     }
     // // cannot be negative
-    // if (newBenefit < 0) {
-    //   newBenefit = 0;
-    // }
     this.benefit = newBenefit;
     this.expiresIn--;
   }
