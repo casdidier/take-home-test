@@ -1,4 +1,11 @@
-import { Drug, NormalDrug, SuperDrug, Pharmacy, drugs } from "./pharmacy";
+import {
+  Drug,
+  MetaDrug,
+  NormalDrug,
+  SuperDrug,
+  Pharmacy,
+  drugs,
+} from "./pharmacy";
 
 describe("Pharmacy", () => {
   describe("Normal drugs", () => {
@@ -45,12 +52,12 @@ describe("Pharmacy", () => {
     });
 
     describe("Drugs stay same as new over time", () => {
-      it("should never expires nor decreases in Benefit (e.g:  Magic Pill)", () => {
+      it("should never expires nor decreases in benefit (e.g:  Magic Pill)", () => {
         expect(
           new Pharmacy([
-            new SuperDrug("Magic Pill", 20, 20),
+            new MetaDrug("Magic Pill", 20, 20),
           ]).updateBenefitValue()
-        ).toEqual([new SuperDrug("Magic Pill", 20, 20)]);
+        ).toEqual([new MetaDrug("Magic Pill", 20, 20)]);
       });
     });
 

@@ -70,6 +70,16 @@ export class SuperDrug extends Drug {
   }
 }
 
+export class MetaDrug extends Drug {
+  constructor(name, expiresIn, benefit) {
+    super(name, expiresIn, benefit);
+  }
+
+  update() {
+    return;
+  }
+}
+
 export class Pharmacy {
   constructor(drugs = []) {
     this.drugs = drugs;
@@ -80,6 +90,9 @@ export class Pharmacy {
         drug.update();
       }
       if (drug instanceof SuperDrug) {
+        drug.update();
+      }
+      if (drug instanceof MetaDrug) {
         drug.update();
       }
     });
