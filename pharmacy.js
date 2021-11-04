@@ -49,6 +49,10 @@ export class SuperDrug extends Drug {
     } else {
       newBenefit = super.updateBenefit(newBenefit, 2);
     }
+
+    if (newBenefit > 50) {
+      newBenefit = 50;
+    }
     // // cannot be negative
     this.benefit = newBenefit;
     this.expiresIn--;
