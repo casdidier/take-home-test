@@ -94,7 +94,7 @@ describe("Pharmacy", () => {
       });
     });
 
-    describe("Drugs with higher efficiency downgrades", () => {
+    describe("Normal Drugs that downgrades faster", () => {
       it("should degrades in benefit twice as fast as normal drugs for Dafalgan", () => {
         expect(
           new Pharmacy([
